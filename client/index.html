@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a fortune</button>
+    <form id="lifeGoals">
+      <h2>Life Goals</h2>
+      <ul></ul>
+      <input 
+          type='text'
+          id="goal"
+          placeholder="Enter your life goals"/>
+      <button>Add Goal</button>
+      <h3>To edit a goal, type in the text box and click the goal you want to edit.</h3>
+    </form>
+    <button id="suggestGoalButton">Suggest Life Goal</button>
+
+    <form id="videoDropdown">
+      <h2>Inspirational Videos</h2>
+      <select id="videoList">
+        <option>Never Give Up</option>
+        <option>Just Do It</option>
+      </select>
+    <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/KxGRhd_iWuE"  frameborder="0" allowfullscreen></iframe>
+
+      </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="client.js"></script>
+  </body>
+</html>
