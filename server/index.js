@@ -44,8 +44,8 @@ app.get("/api/lifegoal", (req, res) => {
 });
 
 //Life goal list
-let goals = [{'id': 0, 'text': 'hello' }];
-let goalId = 1;
+let goals = [];
+let goalId = 0;
 //Fill life goal list
 app.get(`/api/goals`, (req, res) => res.status(200).send(goals))
 //Add new goal

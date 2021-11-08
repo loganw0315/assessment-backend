@@ -1,0 +1,91 @@
+body{
+    background: url(background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h2{
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+    
+}
+
+div{
+    display: block;
+    float: right;
+    margin-top: 21px;
+    text-align: center;
+    padding: 30px;
+}
+
+#videoDropdown{
+    display: block;
+    float: left;
+    margin-top: 50px;
+    text-align: center;
+    margin-left: 50px;
+}
+
+ul{
+    display: block;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#goalsList{
+    border: 8px ridge #732F95;
+    border-radius: 16px;
+}
+
+button{
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.2);
+    margin: 20px;
+    background-color: #732F95;
+    color: white;
+    border: 2px solid black;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+
+}
+
+h1{
+    text-align: center;
+}
+
+input{
+    background-color: rgb(218, 127, 213);
+    color: #361347;
+    transform: scale(1.1);
+
+}
+
+select{
+     -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.2);
+    margin: 20px;
+    background-color: #732F95;
+    color: white;
+    border: 2px solid black;
+}

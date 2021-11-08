@@ -6,7 +6,7 @@ document.getElementById("complimentButton").onclick = function () {
     axios.get("http://localhost:4000/api/compliment/")
         .then(function (response) {
           const data = response.data;
-          alert(data);
+          document.querySelector('h1').textContent = data;
         });
 };
 //Get fortune
@@ -14,7 +14,8 @@ document.getElementById("fortuneButton").onclick = function () {
     axios.get("http://localhost:4000/api/fortune/")
         .then(function (response) {
           const data = response.data;
-          alert(data);
+          document.querySelector('h1').textContent = data;
+
         });
 };
 //Get life goal suggestion
@@ -67,9 +68,13 @@ const getGoals = () => {
         deleteBtn.textContent = "X";
         newGoal.id = res.data[i].id
         goals.appendChild(newGoal)
-        
         deleteBtn.addEventListener('click', deleteGoal)
         goal.addEventListener('click', editGoal)
+      }
+      if(res.data.length > 0){
+        goals.id = "goalsList"
+      } else{
+        goals.id = ""
       }
     })
 
@@ -107,10 +112,12 @@ const editGoal = (event) => {
     id: event.target.parentNode.id,
     text: goalInput.value
   }
+  if(changeGoal.text.length > 0){
   axios.put(`http://localhost:4000/api/goals/${changeGoal.id}`, changeGoal)
     .then(res => {
       getGoals()
     })
+  }
   goalInput.value = ""
 }
 

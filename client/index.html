@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <title>Back End Assessment</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body class="container">
+    <header>
     <button id="complimentButton">Get a compliment</button>
     <button id="fortuneButton">Get a fortune</button>
+  </header>
+  <h1></h1>
+    <div>
     <form id="lifeGoals">
       <h2>Life Goals</h2>
       <ul></ul>
@@ -18,15 +23,16 @@
       <h3>To edit a goal, type in the text box and click the goal you want to edit.</h3>
     </form>
     <button id="suggestGoalButton">Suggest Life Goal</button>
-
+    </div>
     <form id="videoDropdown">
       <h2>Inspirational Videos</h2>
-      <select id="videoList">
-        <option>Never Give Up</option>
-        <option>Just Do It</option>
-      </select>
+      
     <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/KxGRhd_iWuE"  frameborder="0" allowfullscreen></iframe>
-
+    <br>
+    <select id="videoList">
+      <option>Never Give Up</option>
+      <option>Just Do It</option>
+    </select>
       </form>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="client.js"></script>
