@@ -1,5 +1,7 @@
 let form = document.getElementById('lifeGoals')
 let goalInput = document.querySelector('input');
+let submitBtn = document.getElementById('submit');
+let goals = document.querySelector('ul')
 
 //Get compliment
 document.getElementById("complimentButton").onclick = function () {
@@ -50,7 +52,7 @@ document.getElementById("videoList").onchange = function (event) {
 }
 
 
-let goals = document.querySelector('ul')
+
 //Fill goals list
 const getGoals = () => {
   axios.get('http://localhost:4000/api/goals/')
@@ -62,14 +64,18 @@ const getGoals = () => {
         let newGoal = document.createElement('li');
         let goal = document.createElement('span')
         let deleteBtn = document.createElement('button');
+        let editBtn = document.createElement('button');
+        editBtn.className = "editBtn"
         newGoal.appendChild(goal);
         newGoal.appendChild(deleteBtn);
+        newGoal.appendChild(editBtn);
         goal.textContent = res.data[i].text
         deleteBtn.textContent = "X";
+        editBtn.textContent = "Edit";
         newGoal.id = res.data[i].id
         goals.appendChild(newGoal)
         deleteBtn.addEventListener('click', deleteGoal)
-        goal.addEventListener('click', editGoal)
+        editBtn.addEventListener('click', editGoal)
       }
       if(res.data.length > 0){
         goals.id = "goalsList"
@@ -89,6 +95,7 @@ const addGoal = (e) => {
 
   axios.post('http://localhost:4000/api/goals/', addedGoal)
     .then(res => {
+      console.log(res);
       getGoals()
     })
   
@@ -108,10 +115,42 @@ const deleteGoal = (event) => {
 //Edit a goal
 const editGoal = (event) => {
   event.preventDefault()
+  event.target.id = 'editBtn'
+  let editBtn = document.getElementById('editBtn');
+  editBtn.addEventListener('click', formReset)
+  form.removeEventListener('submit', addGoal)
+  form.id = "lifeGoalEdit"
+  let editForm = document.getElementById('lifeGoalEdit')
+  submitBtn.textContent = "Update Goal"
+  submitBtn.id = event.target.parentNode.id
+  goalInput.placeholder = "Edit Life Goal"
+  editBtn.textContent = "Cancel Edit"
+  editForm.addEventListener('submit', updateGoal)
+}
+
+const formReset = (event) => {
+  event.preventDefault()
+  let editBtn = document.getElementById('editBtn');
+  let editForm = document.getElementById('lifeGoalEdit')
+  editBtn.removeEventListener('click', formReset);
+  goalInput.value = ""
+  submitBtn.textContent = "Add Goal"
+  goalInput.placeholder = "Enter your Life Goals"
+  editForm.id = "lifeGoals"
+  editForm.removeEventListener('submit', updateGoal)
+  form.addEventListener('submit', addGoal);
+  editBtn.textContent = "Edit"
+}
+
+const updateGoal = (event) => {
+  event.preventDefault()
+
+  let editForm = document.getElementById('lifeGoalEdit')
   let changeGoal = {
-    id: event.target.parentNode.id,
+    id: submitBtn.id,
     text: goalInput.value
   }
+  console.log(submitBtn.id);
   if(changeGoal.text.length > 0){
   axios.put(`http://localhost:4000/api/goals/${changeGoal.id}`, changeGoal)
     .then(res => {
@@ -119,6 +158,13 @@ const editGoal = (event) => {
     })
   }
   goalInput.value = ""
+  submitBtn.textContent = "Add Goal"
+  goalInput.placeholder = "Enter your Life Goals"
+  editForm.id = "lifeGoals"
+  editForm.removeEventListener('submit', updateGoal)
+  form.addEventListener('submit', addGoal);
+  editBtn.textContent = "Edit"
+  editBtn.addEventListener('click', formReset)
 }
 
 
