@@ -8,7 +8,12 @@ const app = express();
 app.use(cors());
 
 app.use(express.json()); // When we want to be able to accept JSON.
+app.use(express.static('client'))
 
+
+app.get('/', (req,res)=>{
+  res.sendFile(path.join(__dirname, '../index.html'))
+})
 
 
 //Compliments
