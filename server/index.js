@@ -47,6 +47,10 @@ app.get("/api/lifegoal", (req, res) => {
 let goals = [];
 let goalId = 0;
 //Fill life goal list
+app.get('/', (req,res)=>{
+  res.sendFile(path.join(__dirname, '../index.html'))
+})
+
 app.get(`/api/goals`, (req, res) => res.status(200).send(goals))
 //Add new goal
 app.post(`/api/goals`, (req, res) => {
@@ -74,4 +78,8 @@ app.delete(`/api/goals/:id`, (req, res) => {
   res.status(200).send(deletedGoal)
 })
 
-app.listen(4000, () => console.log("Server running on 4000"));
+const port = process.env.PORT || 4000
+
+app.listen(port, ()=>{
+    console.log(`App is running on ${port}`);
+})
