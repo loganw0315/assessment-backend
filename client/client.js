@@ -2,7 +2,6 @@ let form = document.getElementById('lifeGoals')
 let goalInput = document.querySelector('input');
 let submitBtn = document.getElementById('submit');
 let goals = document.querySelector('ul')
-const port = process.env.PORT || 4000
 axios.defaults.baseURL = process.env.APP_URL
 
 //Get compliment
