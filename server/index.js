@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require('path')
 
 const app = express();
-axios.defaults.baseURL = process.env.APP_URL
+// axios.defaults.baseURL = process.env.APP_URL
 
 app.use(cors());
 
