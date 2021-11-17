@@ -2,10 +2,11 @@ let form = document.getElementById('lifeGoals')
 let goalInput = document.querySelector('input');
 let submitBtn = document.getElementById('submit');
 let goals = document.querySelector('ul')
+const port = process.env.PORT || 4000
 
 //Get compliment
 document.getElementById("complimentButton").onclick = function () {
-    axios.get("http://localhost:4000/api/compliment/")
+    axios.get(`${port}/api/compliment/`)
         .then(function (response) {
           const data = response.data;
           document.querySelector('h1').textContent = data;
@@ -13,7 +14,7 @@ document.getElementById("complimentButton").onclick = function () {
 };
 //Get fortune
 document.getElementById("fortuneButton").onclick = function () {
-    axios.get("http://localhost:4000/api/fortune/")
+    axios.get(`${port}/api/fortune/`)
         .then(function (response) {
           const data = response.data;
           document.querySelector('h1').textContent = data;
@@ -22,7 +23,7 @@ document.getElementById("fortuneButton").onclick = function () {
 };
 //Get life goal suggestion
 document.getElementById("suggestGoalButton").onclick = function () {
-    axios.get("http://localhost:4000/api/lifegoal/")
+    axios.get(`${port}/api/lifegoal/`)
         .then(function (response) {
           const data = response.data;
           alert(data);
@@ -55,7 +56,7 @@ document.getElementById("videoList").onchange = function (event) {
 
 //Fill goals list
 const getGoals = () => {
-  axios.get('http://localhost:4000/api/goals/')
+  axios.get(`${port}/api/goals/`)
     .then(res => {
       console.log(res.data);
       goals.innerHTML = ''
@@ -93,7 +94,7 @@ const addGoal = (e) => {
     text: goalInput.value
   }
 
-  axios.post('http://localhost:4000/api/goals/', addedGoal)
+  axios.post(`${port}/api/goals/`, addedGoal)
     .then(res => {
       console.log(res);
       getGoals()
@@ -105,7 +106,7 @@ const addGoal = (e) => {
 const deleteGoal = (event) => {
     event.preventDefault()
     let id = event.target.parentNode.id
-    axios.delete(`http://localhost:4000/api/goals/${id}`)
+    axios.delete(`${port}/api/goals/${id}`)
       .then(res => {
         getGoals()
       })
@@ -152,7 +153,7 @@ const updateGoal = (event) => {
   }
   console.log(submitBtn.id);
   if(changeGoal.text.length > 0){
-  axios.put(`http://localhost:4000/api/goals/${changeGoal.id}`, changeGoal)
+  axios.put(`${port}/api/goals/${changeGoal.id}`, changeGoal)
     .then(res => {
       getGoals()
     })
