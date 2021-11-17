@@ -2,7 +2,7 @@ let form = document.getElementById('lifeGoals')
 let goalInput = document.querySelector('input');
 let submitBtn = document.getElementById('submit');
 let goals = document.querySelector('ul')
-axios.defaults.baseURL = process.env.APP_URL
+
 
 //Get compliment
 document.getElementById("complimentButton").onclick = function () {
