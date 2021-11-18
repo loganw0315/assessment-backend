@@ -21,6 +21,7 @@ var rollbar = new Rollbar({
   captureUnhandledRejections: true,
 })
 
+rollbar.log('Hello World')
 
 //Compliments
 app.get("/api/compliment", (req, res) => {
