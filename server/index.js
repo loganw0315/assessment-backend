@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require('path')
 
 const app = express();
-// axios.defaults.baseURL = process.env.APP_URL
+
 
 app.use(cors());
 
@@ -15,6 +15,12 @@ app.get('/', (req,res)=>{
   res.sendFile(path.join(__dirname, '../index.html'))
 })
 
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: 'ceb8d4f31a4540b6b9b300c2cdded767',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
 
 //Compliments
 app.get("/api/compliment", (req, res) => {
@@ -22,7 +28,7 @@ app.get("/api/compliment", (req, res) => {
 					 "Cool shirt!",
 					 "Your Javascript skills are stellar.",
   ];
-
+  rollbar.info('Someone asked for a compliment')
   // choose random compliment
   let randomIndex = Math.floor(Math.random() * compliments.length);
   let randomCompliment = compliments[randomIndex];
@@ -33,7 +39,7 @@ app.get("/api/compliment", (req, res) => {
 //Fortunes
 app.get("/api/fortune", (req, res) => {
   const fortunes = ["A friend asks only for your time not your money.", "A person of words and not deeds is like a garden full of weeds.", "Adventure can be real happiness.", "Advice, when most needed, is least heeded.", "Believe in yourself and others will too."];
-
+  rollbar.info('Someone asked for a fortune')
   let randomIndex = Math.floor(Math.random() * fortunes.length);
   let randomFortune = fortunes[randomIndex];
 
@@ -42,7 +48,7 @@ app.get("/api/fortune", (req, res) => {
 //Life goal suggestion
 app.get("/api/lifegoal", (req, res) => {
   const goals = ["Drive your dream car", "Eat healthy", "Climb a mountain", "Learn to play an instrument", "Read 100 books"];
-
+  rollbar.info('Someone asked for a life goal')
   let randomIndex = Math.floor(Math.random() * goals.length);
   let randomGoal = goals[randomIndex];
 
@@ -57,10 +63,14 @@ app.get('/', (req,res)=>{
   res.sendFile(path.join(__dirname, '../index.html'))
 })
 
-app.get(`/api/goals`, (req, res) => res.status(200).send(goals))
+app.get(`/api/goals`, (req, res) => {
+  res.status(200).send(goals)
+  rollbar.info('Goals were retrieved from server')
+})
 //Add new goal
 app.post(`/api/goals`, (req, res) => {
   let {text} = req.body
+  rollbar.info('A new goal was added')
   let addedGoal = {
     id: goalId,
     text
@@ -76,12 +86,14 @@ app.put(`/api/goals/:id`, (req, res) => {
   let index = goals.findIndex(e => +e.id === +req.params.id)
   goals[index].text = text
   res.status(200).send(goals[+id])
+  rollbar.info('A goal was edited')
 })
 //Remove goal
 app.delete(`/api/goals/:id`, (req, res) => {
   let index = goals.findIndex(e => +e.id === +req.params.id)
   deletedGoal = goals.splice(index, 1)
   res.status(200).send(deletedGoal)
+  rollbar.info('A goal was deleted')
 })
 
 const port = process.env.PORT || 4000
