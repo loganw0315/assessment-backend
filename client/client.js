@@ -93,13 +93,15 @@ const addGoal = (e) => {
   let addedGoal = {
     text: goalInput.value
   }
-
+  if(addedGoal.text !== 0){
   axios.post(`https://loganwillis.herokuapp.com/api/goals/`, addedGoal)
     .then(res => {
       console.log(res);
       getGoals()
     })
-  
+  } else{
+    alert('Please enter a goal before submitting')
+  }
   goalInput.value = "";
 }
 //Delete a goal
