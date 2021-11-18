@@ -28,7 +28,7 @@ app.get("/api/compliment", (req, res) => {
 					 "Cool shirt!",
 					 "Your Javascript skills are stellar.",
   ];
-  // rollbar.info('Someone asked for a compliment')
+  rollbar.info('Someone asked for a compliment')
   // choose random compliment
   let randomIndex = Math.floor(Math.random() * compliments.length);
   let randomCompliment = compliments[randomIndex];
@@ -39,7 +39,7 @@ app.get("/api/compliment", (req, res) => {
 //Fortunes
 app.get("/api/fortune", (req, res) => {
   const fortunes = ["A friend asks only for your time not your money.", "A person of words and not deeds is like a garden full of weeds.", "Adventure can be real happiness.", "Advice, when most needed, is least heeded.", "Believe in yourself and others will too."];
-  // rollbar.info('Someone asked for a fortune')
+  rollbar.info('Someone asked for a fortune')
   let randomIndex = Math.floor(Math.random() * fortunes.length);
   let randomFortune = fortunes[randomIndex];
 
@@ -63,12 +63,12 @@ let goalId = 0;
 
 app.get(`/api/goals`, (req, res) => {
   res.status(200).send(goals)
-  // rollbar.info('Goals were retrieved from server')
+  rollbar.info('Goals were retrieved from server')
 })
 //Add new goal
 app.post(`/api/goals`, (req, res) => {
   let {text} = req.body
-  // rollbar.info('A new goal was added')
+  rollbar.info('A new goal was added')
   let addedGoal = {
     id: goalId,
     text
@@ -84,14 +84,14 @@ app.put(`/api/goals/:id`, (req, res) => {
   let index = goals.findIndex(e => +e.id === +req.params.id)
   goals[index].text = text
   res.status(200).send(goals[+id])
-  // rollbar.info('A goal was edited')
+  rollbar.info('A goal was edited')
 })
 //Remove goal
 app.delete(`/api/goals/:id`, (req, res) => {
   let index = goals.findIndex(e => +e.id === +req.params.id)
   deletedGoal = goals.splice(index, 1)
   res.status(200).send(deletedGoal)
-  // rollbar.info('A goal was deleted')
+  rollbar.info('A goal was deleted')
 })
 
 const port = process.env.PORT || 4000
