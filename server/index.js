@@ -1,14 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const path = require('path')
-
-var Rollbar = require('rollbar')
-var rollbar = new Rollbar({
-  accessToken: 'ceb8d4f31a4540b6b9b300c2cdded767',
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-})
-
 const app = express();
 
 
@@ -20,6 +12,13 @@ app.use(express.static(path.join(__dirname, 'client/client.js')))
 
 app.get('/', (req,res)=>{
   res.sendFile(path.join(__dirname, '../index.html'))
+})
+
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: 'ceb8d4f31a4540b6b9b300c2cdded767',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
 })
 
 
